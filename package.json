@@ -1,0 +1,32 @@
+{
+  "name": "screenwatchapi",
+  "version": "1.0.0",
+  "description": "Screen Watch Api in nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stoic1979/ScreenWatchApi.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stoic1979/ScreenWatchApi/issues"
+  },
+  "homepage": "https://github.com/stoic1979/ScreenWatchApi#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "chai": "^4.1.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "express-fileupload": "^0.3.0",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.1.0",
+    "mocha": "^4.1.0",
+    "mongoose": "^5.0.0-rc0",
+    "winston": "^2.4.0"
+  }
+}

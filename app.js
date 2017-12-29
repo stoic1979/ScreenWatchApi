@@ -16,6 +16,7 @@ var fileUpload = require('express-fileupload');
 //  SETUP APP
 //----------------------------------------------------------------------------
 var app = express();
+const SECRET_KEY="ScreenWatch"
 app.use(cors());
 
 
@@ -32,51 +33,13 @@ app.use(bodyParser.json());
 //app.use(session({secret: "Your secret key"}));
 
 
-//-----------------------------------------------------
-//   APP ROUTES
-//-----------------------------------------------------
-
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + "/public/views/" + "index.html" );
-})
-
-app.get('/test_verified_page', function (req, res) {
-    res.sendFile(__dirname + "/public/views/pages/" + "verification_done.html" );
-})
-
-app.get('/file_upload', function (req, res) {
-    res.sendFile(__dirname + "/public/views/general/" + "file_upload.html" );
-})
-
-app.post('/file_upload', function (req, res) {
-
-    if (!req.files)
-    return res.status(400).send('No files were uploaded.');
-
-// The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  var sampleFile = req.files.sampleFile;
-
-  console.log("sampleFile: " + sampleFile.name);
-
-  var filePath = "./" + sampleFile.name;
- 
-  // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv(filePath, function(err) {
-    if (err)
-      return res.status(500).send(err);
- 
-    res.send('File uploaded!');
-  });
-
-})
 
 //---------------------------------------------------
 // url ignore list for token validation middleware
 //---------------------------------------------------
 var ignore_list = [
-    '/users/signup', '/users/login', 'file_upload',
-    '/favicon.ico'    
-];
+    '/users/signup', '/users/login' 
+   ]
 
 //----------------------------------------------------------------------------
 //   TOKEN VALIDATION
@@ -86,41 +49,41 @@ var ignore_list = [
 //   NOTE - register this middleware before registering routes
 //----------------------------------------------------------------------------
 
-// app.use(function(req, res, next){
+app.use(function(req, res, next){
 
-//     logger.debug("api.use() :: Got some request, validating token, req=" + req.originalUrl);
+    logger.debug("api.use() :: Got some request, validating token, req=" + req.originalUrl);
 
 
-//     // if url is in ignore list, move onto next()
-//     if (ignore_list.indexOf(req.originalUrl) > -1) {
-//         return next();
-//     }
+    // if url is in ignore list, move onto next()
+    if (ignore_list.indexOf(req.originalUrl) > -1) {
+        return next();
+    }
 
-//     if(req.originalUrl.indexOf('/users/verify/') > -1) {
-//         return next();
-//     }
+    // if(req.originalUrl.indexOf('/users/verify/') > -1) {
+    //     return next();
+    // }
 
-//     var token = req.body.token || req.params.token || req.headers['x-access-token'];
+    var token = req.body.token || req.params.token || req.headers['x-access-token'];
 
-//     if(token) {
+    if(token) {
 
-//         jsonwebtoken.verify(token, SECRET_KEY, function(err, decoded){
+        jsonwebtoken.verify(token, SECRET_KEY, function(err, decoded){
 
-//             if(err) {
-//                 //res.status(403).send({success: false, message: "Failed to authenticate user"});
-//                 logger.warn("api.use() :: :: Failed to authenticate user");
-//             } else {
-//                 req.decoded = decoded;
-//                 logger.debug("api.use() :: -> decoded: " + JSON.stringify(req.decoded) );
-//                 next();
-//             } 	
-//         });
+            if(err) {
+                //res.status(403).send({success: false, message: "Failed to authenticate user"});
+                logger.warn("api.use() :: :: Failed to authenticate user");
+            } else {
+                req.decoded = decoded;
+                logger.debug("api.use() :: -> decoded: " + JSON.stringify(req.decoded) );
+                next();
+            } 	
+        });
 
-//     } else {
-//         logger.warn("api.use() :: No token provided");
-//         res.status(403).send({success: false, message: "No token provided"});
-//     }
-// });//use
+    } else {
+        logger.warn("api.use() :: No token provided");
+        res.status(403).send({success: false, message: "No token provided"});
+    }
+});//use
 
 
 //----------------------------------------------------------------------------

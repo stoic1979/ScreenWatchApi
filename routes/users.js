@@ -22,9 +22,23 @@ function checkSignIn(req, res){
     }
 }
 
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-    res.send('respond with a resource');
+// /* GET users listing. */
+// router.get('/', function(req, res, next) {
+//     res.send('respond with a resource');
+// });
+
+
+router.get('/get_user', function(req, res){
+    User.find({})
+    .then( function(users){
+        if(users){
+            res.json({success: true, User: users});
+        }
+        else{
+            res.json({success: false, "getAllEvent Got error ": + err});
+            console.log("getAllEvent Got error: " + err);
+        }
+    });
 });
 
 router.post('/signup', function(req, res, next) {
@@ -44,11 +58,6 @@ router.post('/signup', function(req, res, next) {
             res.send(err);
             return;
         }
-
-       
-        
-
-
     });
 
 });

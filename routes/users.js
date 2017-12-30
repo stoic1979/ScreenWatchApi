@@ -10,7 +10,7 @@ var secretKey = "ScreenWatch";
 var tokenMaker = new TokenMaker(secretKey);
 
 
-var User = require('../schema/user');
+var Users = require('../schema/user');
 
 function checkSignIn(req, res){
     if(req.session.user){
@@ -29,10 +29,10 @@ function checkSignIn(req, res){
 
 
 router.get('/get_user', function(req, res){
-    User.find({})
+    Users.find({})
     .then( function(users){
         if(users){
-            res.json({success: true, User: users});
+            res.json({Users: users});
         }
         else{
             res.json({success: false, "getAllEvent Got error ": + err});

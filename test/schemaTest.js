@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose   = require('mongoose');
 // const assert   = require('chai').assert;
 mongoose.Promise = global.Promise;
-const User     = require('../schema/user');
-
+const User       = require('../schema/user');
+const ScreenShot = require('../schema/screenShot');
 
 //const port     = process.env.PORT || process.env.TEAM_MANAGER_PORT;
 
@@ -55,6 +55,24 @@ function addUser(){
   });
 }
 
+function addScreenShot(){
+  var screenshot = new ScreenShot({
+    user:"5a45fc8174c87f310df76ab2",
+    memo: "test memo",
+    img: "testing",
+    
+
+  });
+  screenshot.save(function(err, s){
+    if (err) {
+      console.log("failed to save the screenshot, Got Exception: " + err);
+    }
+    else{
+      console.log("Successfully saved screenshot: \n" +s);
+    }
+  });
+}
+
 //------------------------------------------------------------------
 //
 //                 CONNECTING TO MONGODB
@@ -77,9 +95,9 @@ mongoose.connect(MONGODB_URI, function(err) {
     console.log("[SchemaTest] Successfully connected to database. ");
 
     // step 2: save schema's in db
-    //addEventThenRsvp();
-    //getAllRsvp();
-    addUser();
+   
+    // addUser();
+    addScreenShot();
 });
 
 

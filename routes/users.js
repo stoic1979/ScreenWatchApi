@@ -43,7 +43,7 @@ router.get('/get_user', function(req, res){
 
 router.post('/signup', function(req, res, next) {
 
-    var user = new User({
+    var user = new Users({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
         username: req.body.username,
@@ -69,14 +69,14 @@ router.post('/signup', function(req, res, next) {
 //-----------------------------------------------------
 router.post('/login', function(req, res) {
 
-    User.findOne({
+    Users.findOne({
         username: req.body.username
             //}).select('password').exec(function(err, user) { // this will only select _id and password in user obj
         }).exec(function(err, user) {	//// this will select all fields in user obj
 
         if(err) throw err;
 
-        if(!user) {
+        if(!Users) {
             res.send({ success: false, message: 'User does not exist !'});
             //res.status(403).send( {success: false, message: 'User does not exist !'});
         } else if(user) {
@@ -137,17 +137,17 @@ router.get('/verify/:token', function(req, res) {
             } 
 
         // approving user
-		User.update({_id: decoded._id}, {is_verified: true}, function(err, numberAffected, rawResponse) {
+		Users.update({_id: decoded._id}, {is_verified: true}, function(err, numberAffected, rawResponse) {
 
 			console.log("-- saved: " + err);
 				if(err) res.send("Token verification failed!");
 				else {
 
-					//res.send("User verification Successfully!");
+					res.send("User verified Successfully!");
 
-                    var parentDir  = __dirname.substring(0, __dirname.lastIndexOf('/'));
+                    // var parentDir  = __dirname.substring(0, __dirname.lastIndexOf('/'));
 
-					res.sendFile(parentDir + '/public/views/general/verification_done.html') ;
+					// res.sendFile(parentDir + '/public/views/general/verification_done.html') ;
 			}
 		})
              	

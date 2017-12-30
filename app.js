@@ -7,9 +7,10 @@ var session      = require('express-session');
 var jsonwebtoken = require('jsonwebtoken');
 var index        = require('./routes/index');
 var users        = require('./routes/users');
+var screenShots  = require('./routes/screenShot');
 const cors       = require('cors');
 const logger     = require('./helpers/logger');
-var fileUpload = require('express-fileupload');
+var fileUpload   = require('express-fileupload');
 
 
 //----------------------------------------------------------------------------
@@ -33,12 +34,36 @@ app.use(bodyParser.json());
 //app.use(session({secret: "Your secret key"}));
 
 
+// app.get('/file_upload', function (req, res) {
+//     res.sendFile(__dirname + "/public/views/general/" + "file_upload.html" );
+// })
 
+// app.post('/file_upload', function (req, res) {
+
+//     if (!req.files)
+//     return res.status(400).send('No files were uploaded.');
+
+// // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+//   var sampleFile = req.files.sampleFile;
+
+//   console.log("sampleFile: " + sampleFile.name);
+
+//   var filePath = "./" + sampleFile.name;
+ 
+//   // Use the mv() method to place the file somewhere on your server
+//   sampleFile.mv(filePath, function(err) {
+//     if (err)
+//       return res.status(500).send(err);
+ 
+//     res.send('File uploaded!');
+//   });
+
+// })
 //---------------------------------------------------
 // url ignore list for token validation middleware
 //---------------------------------------------------
 var ignore_list = [
-    '/users/signup', '/users/login' 
+    '/users/signup', '/users/login' , '/screenShots/file_upload', 'file_upload',
    ]
 
 //----------------------------------------------------------------------------
@@ -89,8 +114,9 @@ app.use(function(req, res, next){
 //----------------------------------------------------------------------------
 // adding routers
 //----------------------------------------------------------------------------
-app.use('/',          index);
-app.use('/users',     users);
+app.use('/',            index);
+app.use('/users',       users);
+app.use('/screenShots', screenShots);
 
 app.get('/time', function(request, response) {
 

@@ -1,0 +1,162 @@
+.h1 small {
+  font-size: 24px;
+}
+
+.verification-thumbnail
+{
+	width: 50%;
+	background-color: rgba(243, 243, 243, 0.22);
+	border: 2px solid #1f8c04;;
+
+}
+.verification-thumbnail img
+{
+    width:50%;
+}
+h1
+{
+	text-align: center;
+	color:#1f8c04;;
+}
+p
+{
+	text-align: center;
+    color:#808080;
+}
+
+.pricing {
+  position: relative;
+  margin-bottom: 15px;
+  border: 3px solid  #000080;;
+}
+.pricing-active {
+  border: 3px solid   #228B22;
+  margin-top: -10px;
+  box-shadow: 7px 7px rgba(54, 215, 172, 0.2);
+}
+.pricing:hover {
+  border: 3px solid   #ff0000;
+}
+.pricing:hover h4 {
+  color:    #ff0000;
+}
+.pricing-head {
+  text-align: center;
+}
+.pricing-head h3,
+.pricing-head h4 {
+  margin: 0;
+  line-height: normal;
+}
+.pricing-head h3 span,
+.pricing-head h4 span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  font-style: italic;
+}
+.pricing-head h3 {
+  font-weight: 300;
+  color: #fafafa;
+  padding: 12px 0;
+  font-size: 27px;
+  background:  #428bca;
+  }
+.pricing-head h4 {
+  color: #000080;;
+  padding: 5px 0;
+  font-size: 54px;
+  font-weight: 300;
+  background: #fbfef2;
+  border-bottom: solid 1px #f5f9e7;
+}
+.pricing-head-active h4 {
+  color:    #228B22;
+}
+.pricing-head h4 i {
+  top: -8px;
+  font-size: 28px;
+  font-style: normal;
+  position: relative;
+}
+.pricing-head h4 span {
+  top: -10px;
+  font-size: 14px;
+  font-style: normal;
+  position: relative;
+}
+.pricing-content li {
+  color: #‎428bca;
+  font-size: 12px;
+  padding: 7px 15px;
+  border-bottom: solid 1px #f5f9e7;
+}
+.pricing-footer {
+  color: #777;
+  font-size: 15px;
+  line-height: 17px;
+  text-align: center;
+  padding: 0 20px 19px;
+}
+.price-active,
+.pricing:hover {
+  z-index: 9;
+}
+.price-active h4 {
+  color: #36d7ac;
+}
+
+/*
+#profile-img{
+  border-radius: 50px;
+  margin-top:30px;
+}
+#wel{
+  margin-left: 0px;
+  margin-right: 0px;
+
+}
+#profile{
+  margin-top: 30px;
+}
+#name{
+  margin-left: 50px;
+  
+}
+#user{
+ margin-left: 10px;
+
+}
+#email{
+  margin-left: 60px;
+}
+#fullname{
+  margin-left: 30px;
+}
+#password{
+  margin-left: 30px;
+}
+#details{
+  margin-left: 100px;
+}
+
+#team{
+  margin-left: 50px;
+}
+#username{
+  margin-left: 60px;
+
+}
+#groups{
+  margin-left: 60px;
+}
+#preference{
+  margin-left: 60px;
+}
+#prefer{
+  margin-left: 80px;
+}
+#labs{
+  margin-left: 50px;
+}
+*/

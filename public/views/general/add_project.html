@@ -1,0 +1,51 @@
+<div class="container" ng-controller="ProjectController as project">
+    <div class="panel panel-primary"> <!-- div panel -->
+        <div class="panel-heading">Add Project</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6 col-md-4 col-md-offset-4">
+                    <form method="post" role="form" autocomplete="off" ng-submit="project.createProject()">
+
+                        <div class="row">
+                            <label> Title </label>
+                            <input type="text" tabindex="1" class="form-control"  ng-model="project.projectData.title">
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label> Descripition </label>
+                            <textarea name="description" class="form-control" ng-model="project.projectData.description"> 
+                            </textarea>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label>Start Date</label> 
+                            <input type="date" class="form-control" ng-model="issue.issueData.start_date"> 
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label>End Date</label> 
+                            <input type="date" class="form-control" ng-model="issue.issueData.end_date"> 
+                        </div>
+                        <br>
+                        <div class="row">
+                            <label>Estimated Hours:</label>
+                            <input type="text" class="form-control"  ng-model="issue.issueData.estimated_hours">
+                        </div><br>
+
+                        <div class="row">
+                            <input type="submit" name="register-submit" id="register-submit" tabindex="4" class="form-control btn btn-primary" value="Save Project">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <br>
+            <ul>
+                <li ng-repeat="p in project.projects"><a href="#!" >{{ p.title }}</a></li>
+            </ul>
+
+        </div><!-- div panel-body -->
+    </div><!-- div panel -->
+</div><!-- div controller -->
+

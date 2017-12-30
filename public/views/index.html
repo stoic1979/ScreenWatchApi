@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <title>Team Manager</title>
+        <script type="text/javascript" src="js/jquery.min.js"></script>
+
+        <!-- FIXME - fix the icon loading of sidebar -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+        <!-- Custom styles for this template -->
+        <link href="css/sticky-footer.css" rel="stylesheet">
+
+
+        <link href="css/custom.css" rel="stylesheet">
+
+        <link href='css/sidebar.css' rel='stylesheet' type='text/css'>
+
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/angular-route.min.js"></script>
+
+        <script src="js/Chart.min.js"></script>
+
+        <!-- SERVICES -->
+        <script type="text/javascript" src="app/services/authService.js"></script>
+        <script type="text/javascript" src="app/services/userService.js"></script>
+        <script type="text/javascript" src="app/services/projectService.js"></script>
+        <script type="text/javascript" src="app/services/issueService.js"></script>
+        <script type="text/javascript" src="app/services/teamService.js"></script>
+
+        <!-- CONTROLLERS -->
+        <script type="text/javascript" src="app/controllers/mainController.js"></script>
+        <script type="text/javascript" src="app/controllers/userController.js"></script>
+        <script type="text/javascript" src="app/controllers/projectController.js"></script>
+        <script type="text/javascript" src="app/controllers/issueController.js"></script>
+        <script type="text/javascript" src="app/controllers/teamController.js"></script>
+
+
+        <!-- ROUTES -->
+        <script type="text/javascript" src="app/app.routes.js"></script>
+
+        <!-- ANGULAR APP -->
+        <script type="text/javascript" src="app/app.js"></script>
+
+    </head>
+    <body ng-controller="MainController as main">
+
+        <div id="wrapper" ><!-- WRAPPER -->
+
+            <!-- decide navbar on basis of user role -->
+            <div ng-if="main.isManager()" ng-include="'views/manager/partials/navbar.html'"></div>
+            <div ng-if="main.isWorker()" ng-include="'views/worker/partials/navbar.html'"></div>
+            <div ng-if="main.isAdmin()" ng-include="'views/admin/partials/navbar.html'"></div>
+            <div ng-if="!main.loggedIn" ng-include="'views/general/partials/navbar.html'"></div>
+
+            <!-- decide sidebar on basis of user role -->
+            <div ng-if="main.isManager()" ng-include="'views/manager/partials/sidebar.html'"></div>    
+            <div ng-if="main.isWorker()" ng-include="'views/worker/partials/sidebar.html'"></div>    
+            <div ng-if="main.isAdmin()" ng-include="'views/admin/partials/sidebar.html'"></div>    
+
+            <div id="page-content-wrapper">
+                <div class="page-content">
+                    <div class="container-fluid">
+                        <main class="container">
+                        <!-- <div class="jumbotron" ng-view></div> -->
+                        <div ng-view></div>
+                        </main>
+                    </div>
+                </div>
+            </div>   
+            
+        </div><!-- WRAPPER -->
+
+        <div ng-include="'views/general/partials/footer.html'"></div>
+    </body>
+</html>

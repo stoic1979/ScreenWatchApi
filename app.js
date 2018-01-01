@@ -10,8 +10,10 @@ var users        = require('./routes/users');
 var screenShots  = require('./routes/screenShot');
 const cors       = require('cors');
 const logger     = require('./helpers/logger');
-var fileUpload   = require('express-fileupload');
+var  fileUpload   = require('express-fileupload');
 
+
+var fs           = require('fs');
 
 //----------------------------------------------------------------------------
 //  SETUP APP
@@ -19,8 +21,6 @@ var fileUpload   = require('express-fileupload');
 var app = express();
 const SECRET_KEY="ScreenWatch"
 app.use(cors());
-
-
 app.use(fileUpload());
 
 
@@ -33,37 +33,66 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 //app.use(session({secret: "Your secret key"}));
 
+// 
 
-// app.get('/file_upload', function (req, res) {
-//     res.sendFile(__dirname + "/public/views/general/" + "file_upload.html" );
-// })
+// var dir = './Upload';
+// if (!fs.existsSync(dir)){
+//     fs.mkdirSync(dir);
+//     }
+// else {
+//     console.log("directory already exists");
+//     }
 
-// app.post('/file_upload', function (req, res) {
 
-//     if (!req.files)
-//     return res.status(400).send('No files were uploaded.');
+app.get('/file_upload', function (req, res) {
+    res.sendFile(__dirname + "/public/views/general/" + "file_upload.html" );
+})
 
-// // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-//   var sampleFile = req.files.sampleFile;
+app.post('/file_upload', function (req, res) {
 
-//   console.log("sampleFile: " + sampleFile.name);
+     var dir = `./Upload`;
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+        }
+    else {
+        console.log("directory already exists");
+        }
 
-//   var filePath = "./" + sampleFile.name;
+    if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+
+// The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  var sampleFile = req.files.sampleFile;
+  var user_id    = req.body.user_id;
+
+
+
+ var dir = `./Upload/${user_id}`;
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+        }
+    else {
+        console.log("directory already exists");
+        }
+
+  console.log("sampleFile: " + sampleFile.name);
+
+  var filePath = `./Upload/${user_id}/` + sampleFile.name;
  
-//   // Use the mv() method to place the file somewhere on your server
-//   sampleFile.mv(filePath, function(err) {
-//     if (err)
-//       return res.status(500).send(err);
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv(filePath, function(err) {
+    if (err)
+      return res.status(500).send(err);
  
-//     res.send('File uploaded!');
-//   });
+    res.send('File uploaded!');
+  });
 
-// })
+})
 //---------------------------------------------------
 // url ignore list for token validation middleware
 //---------------------------------------------------
 var ignore_list = [
-    '/users/signup', '/users/login' , '/screenShots/file_upload', 'file_upload',
+    '/users/signup', '/users/login' , '/screenShots/file_upload', '/file_upload',
    ]
 
 //----------------------------------------------------------------------------

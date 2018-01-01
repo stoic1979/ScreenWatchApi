@@ -24,6 +24,10 @@ router.get('/register', function(req, res, next) {
   res.render('register', { title: 'Screen Watch' });
 });
 
+router.get('/file_upload', function(req, res, next) {
+  res.render('file_upload', { title: 'Screen Watch' });
+});
+
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Screen Watch' });
 });

@@ -24,6 +24,7 @@
     "express": "^4.16.2",
     "express-fileupload": "^0.3.0",
     "express-session": "^1.15.6",
+    "file-system": "^2.2.2",
     "jsonwebtoken": "^8.1.0",
     "mocha": "^4.1.0",
     "mongoose": "^5.0.0-rc0",

@@ -5,6 +5,10 @@ const ScreenShotSchema = new mongoose.Schema({
 		type: mongoose.Schema.Types.ObjectId, 
         ref: 'User'
 	},
+	project: {
+		type: mongoose.Schema.Types.ObjectId, 
+        ref: 'Project'
+	},
 	memo: {
 		type: String,
 		required: true

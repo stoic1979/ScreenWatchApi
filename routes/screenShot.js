@@ -1,14 +1,30 @@
 var express      = require('express');
+var path         = require('path');
+var bodyParser   = require('body-parser');
 var router       = express.Router();
 var fileUpload   = require('express-fileupload');
+const cors       = require('cors');
+const logger     = require('../helpers/logger');
+var ScreenShot   = require('../schema/screenShot');
 
-var ScreenShot = require('../schema/screenShot');
 
-var secretKey = "ScreenWatch";
 
+
+var app = express();
+app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.static(path.join(__dirname, '/public')));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+const SECRET_KEY="ScreenWatch"
+app.use(cors());
+
+
+app.use(fileUpload());
 
 router.get('/file_upload', function (req, res) {
-    res.sendFile(__dirname + "/../public/views/general/" + "file_upload.html" );
+    res.sendFile(__dirname + "../public/views/general/" + "file_upload.html" );
 })
 
 

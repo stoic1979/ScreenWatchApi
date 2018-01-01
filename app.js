@@ -64,10 +64,19 @@ app.post('/file_upload', function (req, res) {
 // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   var sampleFile = req.files.sampleFile;
   var user_id    = req.body.user_id;
+  var project_id = req.body.project_id;
 
 
 
- var dir = `./Upload/${user_id}`;
+var dir = `./Upload/${project_id}`;
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir);
+        }
+    else {
+        console.log("directory already exists");
+        }
+
+var dir = `./Upload/${project_id}/${user_id}`;
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
         }
@@ -77,7 +86,7 @@ app.post('/file_upload', function (req, res) {
 
   console.log("sampleFile: " + sampleFile.name);
 
-  var filePath = `./Upload/${user_id}/` + sampleFile.name;
+  var filePath = `./Upload/${project_id}/${user_id}/` + sampleFile.name;
  
   // Use the mv() method to place the file somewhere on your server
   sampleFile.mv(filePath, function(err) {
